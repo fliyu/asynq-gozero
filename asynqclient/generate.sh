@@ -1,0 +1,1 @@
+goctl api go -api asynqclient.api -dir .

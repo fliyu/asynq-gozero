@@ -1,0 +1,29 @@
+type Request {
+	Name string `path:"name,options=you|me"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+// 发送邮件请求参数
+type SendEmailRequest {
+	Email   string `json:"email"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
+	IsDelay bool   `json:"is_delay,default=false"` // 是否延迟发送
+	Time    int64  `json:"time,optional"`          // 延迟发送时间,10位时间戳
+}
+
+// 发送邮件响应结果
+type SendEmailResponse {
+}
+
+service asynqclient-api {
+	@handler AsynqclientHandler
+	get /from/:name(Request) returns (Response)
+	
+	@doc "发送邮件"
+	@handler SendEmailHandler
+	post /send_email(SendEmailRequest) returns (SendEmailResponse)
+}

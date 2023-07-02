@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package asynqserver;
+option go_package="./asynqserver";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Asynqserver {
+  rpc Ping(Request) returns(Response);
+}
